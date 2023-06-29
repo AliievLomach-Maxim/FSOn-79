@@ -3,7 +3,7 @@ const Modal = ({ children, closeModal }) => {
 		<div
 			className='modal fade show'
 			style={{ display: 'block', backdropFilter: 'blur(5px)' }}
-			onClick={closeModal}
+			// onClick={closeModal}
 		>
 			<div className='modal-dialog'>
 				<div className='modal-content'>
