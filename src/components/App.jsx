@@ -3,11 +3,13 @@ import { Component } from 'react'
 import Header from './Header/Header'
 import Modal from './Modal/Modal'
 import ToDoList from './ToDoList/ToDoList'
+import FormSignUp from './FormSignUp/FormSignUp'
+import { nanoid } from 'nanoid'
+import FormikSignUp from './FormSignUp/FormikSignUp'
 
 class App extends Component {
 	state = {
 		isShowModal: false,
-		isShowModal2: false,
 	}
 
 	openModal = () => {
@@ -17,12 +19,14 @@ class App extends Component {
 	closeModal = () => {
 		this.setState({ isShowModal: false })
 	}
-	openModal2 = () => {
-		this.setState({ isShowModal2: true })
-	}
 
-	closeModal2 = () => {
-		this.setState({ isShowModal2: false })
+	createUser = (data) => {
+		const newUser = {
+			id: nanoid(),
+			isDev: true,
+			...data,
+		}
+		console.log(newUser)
 	}
 
 	render() {
@@ -35,12 +39,14 @@ class App extends Component {
 				{/* <Counter /> */}
 				{this.state.isShowModal && (
 					<Modal closeModal={this.closeModal}>
-						<h2>Modal</h2>
-					</Modal>
-				)}
-				{this.state.isShowModal2 && (
-					<Modal closeModal={this.closeModal2}>
-						<h2>Modal2</h2>
+						<FormikSignUp
+							closeModal={this.closeModal}
+							createUser={this.createUser}
+						/>
+						{/* <FormSignUp
+							closeModal={this.closeModal}
+							createUser={this.createUser}
+						/> */}
 					</Modal>
 				)}
 				<ToDoList />

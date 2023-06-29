@@ -1,4 +1,4 @@
-const Header = ({ handleShowModal, handleShowModal2 }) => {
+const Header = ({ handleShowModal }) => {
 	return (
 		<nav className='navbar bg-dark mb-3'>
 			<div className='container-fluid'>
@@ -10,12 +10,6 @@ const Header = ({ handleShowModal, handleShowModal2 }) => {
 					onClick={handleShowModal}
 				>
 					Open Modal
-				</button>
-				<button
-					className='btn btn-outline-danger'
-					onClick={handleShowModal2}
-				>
-					Open Modal2
 				</button>
 			</div>
 		</nav>
