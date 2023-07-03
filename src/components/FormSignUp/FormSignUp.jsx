@@ -8,6 +8,7 @@ class FormSignUp extends Component {
 		select: 'male',
 		radio: 'male',
 	}
+
 	handleChange = ({ target: { name, value, checked, type } }) => {
 		this.setState({
 			[name]: type === 'checkbox' ? checked : value,
