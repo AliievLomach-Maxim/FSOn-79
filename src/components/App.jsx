@@ -2,10 +2,11 @@ import { Component } from 'react'
 // import Counter from './Counter/Counter'
 import Header from './Header/Header'
 import Modal from './Modal/Modal'
-import ToDoList from './ToDoList/ToDoList'
 import FormSignUp from './FormSignUp/FormSignUp'
 import { nanoid } from 'nanoid'
 import FormikSignUp from './FormSignUp/FormikSignUp'
+import UsersList from './UsersList/UsersList'
+import { Toaster } from 'react-hot-toast'
 
 class App extends Component {
 	state = {
@@ -32,6 +33,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className='container'>
+				<Toaster />
 				<Header
 					handleShowModal={this.openModal}
 					handleShowModal2={this.openModal2}
@@ -39,17 +41,17 @@ class App extends Component {
 				{/* <Counter /> */}
 				{this.state.isShowModal && (
 					<Modal closeModal={this.closeModal}>
-						<FormikSignUp
-							closeModal={this.closeModal}
-							createUser={this.createUser}
-						/>
-						{/* <FormSignUp
+						{/* <FormikSignUp
 							closeModal={this.closeModal}
 							createUser={this.createUser}
 						/> */}
+						<FormSignUp
+							closeModal={this.closeModal}
+							createUser={this.createUser}
+						/>
 					</Modal>
 				)}
-				<ToDoList />
+				<UsersList />
 			</div>
 		)
 	}
