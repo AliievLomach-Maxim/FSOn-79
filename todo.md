@@ -88,4 +88,15 @@
 
 ### Less 2
 
--   cdC
+> > feef20bb6ec8430ab253f1d0367f9ccf
+
+-   http how to use
+-   architecture
+    -   search -> app -> content
+    -   validation search with react-hot-toast
+    -   componentDidUpdate in content
+    -   fetch in content
+    -   loading in content
+    -   destructuring state
+-   http errors
+-   pattern stateMachine with status['idle','pending','rejected','resolved']

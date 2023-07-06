@@ -2,11 +2,12 @@ import { Component } from 'react'
 // import Counter from './Counter/Counter'
 import Header from './Header/Header'
 import Modal from './Modal/Modal'
-import FormSignUp from './FormSignUp/FormSignUp'
+import FormSignUp from './Forms/FormSignUp/FormSignUp'
 import { nanoid } from 'nanoid'
-import FormikSignUp from './FormSignUp/FormikSignUp'
-import UsersList from './UsersList/UsersList'
+// import FormikSignUp from './Forms/FormSignUp/FormikSignUp'
+// import UsersList from './Users/UsersList/UsersList'
 import { Toaster } from 'react-hot-toast'
+import Users from './Users/Users'
 
 class App extends Component {
 	state = {
@@ -51,7 +52,7 @@ class App extends Component {
 						/>
 					</Modal>
 				)}
-				<UsersList />
+				<Users />
 			</div>
 		)
 	}
