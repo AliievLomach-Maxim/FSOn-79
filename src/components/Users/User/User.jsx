@@ -1,14 +1,3 @@
-// import { Component } from "react";
-
-// class User extends Component {
-//     state = {  }
-//     render() {
-//         return (<></>);
-//     }
-// }
-
-// export default User;
-
 const User = ({
 	user: { _id, image, firstName, email, phone },
 	deleteUser,
