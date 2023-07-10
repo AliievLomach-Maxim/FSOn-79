@@ -88,4 +88,35 @@
 
 ### Less 2
 
--   cdC
+> > feef20bb6ec8430ab253f1d0367f9ccf
+
+-   http how to use
+-   architecture
+    -   search -> app -> content
+    -   validation search with react-hot-toast
+    -   componentDidUpdate in content
+    -   fetch in content
+    -   loading in content
+    -   destructuring state
+-   http errors
+-   pattern stateMachine with status['idle','pending','rejected','resolved']
+
+# Module 4
+
+### Less 1
+
+-   useState
+-   useState nothing save state
+-   useState one State = one useState
+-   useState convert class to hooks
+
+-   useEffect
+-   useEffect first render
+-   useEffect every render
+-   useEffect clear after render
+
+-   useEffect first render
+-   useEffect update on any change
+
+-   edit class to huk
+-   if return
