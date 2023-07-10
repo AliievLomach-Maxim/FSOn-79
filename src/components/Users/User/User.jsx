@@ -1,3 +1,14 @@
+// import { Component } from "react";
+
+// class User extends Component {
+//     state = {  }
+//     render() {
+//         return (<></>);
+//     }
+// }
+
+// export default User;
+
 const User = ({
 	user: { _id, image, firstName, email, phone },
 	deleteUser,
@@ -9,9 +20,6 @@ const User = ({
 				<h5 className='card-title'>Name: {firstName}</h5>
 				<p className='card-text'>Phone: {phone}</p>
 				<p className='card-text'>Email: {email}</p>
-				<a href='qwe' className='btn btn-primary'>
-					Details
-				</a>
 				<button
 					className='btn btn-danger'
 					onClick={() => deleteUser(_id)}
