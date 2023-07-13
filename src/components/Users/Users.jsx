@@ -1,108 +1,107 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import UsersList from './UsersList/UsersList'
-import data from '../../users.json'
-import FilterUsersForm from '../Forms/FilterUsersForm/FilterUsersForm'
+import { getAllUsers } from '../../api/users'
+import Modal from '../Modal/Modal'
 
 const Users = () => {
 	const [users, setUsers] = useState(null)
-	const [filteredUsers, setFilteredUsers] = useState(null)
-
+	const [isLoading, setIsLoading] = useState(false)
+	const [error, setError] = useState('')
+	const [showModal, setShowModal] = useState(false)
 	useEffect(() => {
-		const localData = localStorage.getItem('users')
-		if (localData && JSON.parse(localData).length > 0)
-			setUsers(JSON.parse(localData))
-		else setUsers([...data])
+		getUsers()
 	}, [])
 
-	useEffect(() => {
-		if (users) localStorage.setItem('users', JSON.stringify(users))
+	const sortedUsers = useMemo(() => {
+		return users?.toSorted((a, b) => {
+			console.log('Sorting')
+			return a.firstName.localeCompare(b.firstName)
+		})
 	}, [users])
 
-	const handleFilter = (filterQuery) => {
-		filterQuery
-			? setFilteredUsers(
-					users.filter((user) =>
-						user.firstName
-							.toLowerCase()
-							.includes(filterQuery.toLowerCase())
-					)
-			  )
-			: setFilteredUsers(null)
-	}
+	const getUsers = async () => {
+		setIsLoading(true)
+		setError('')
 
-	const deleteUser = (id) => {
-		setUsers((prev) => prev.filter((user) => user._id !== id))
+		try {
+			const data = await getAllUsers()
+			setUsers(data.users)
+			setIsLoading(false)
+		} catch (error) {
+			setError(error.message)
+			setIsLoading(false)
+		}
 	}
+	console.log('sortedUsers :>> ', sortedUsers)
 
+	const inputRef = useRef()
+
+	const handleFocus = () => {
+		inputRef.current.focus()
+	}
 	return (
 		<>
-			<FilterUsersForm handleFilter={handleFilter} />
-			<UsersList
-				users={users}
-				filteredUsers={filteredUsers}
-				deleteUser={deleteUser}
-			/>
+			<button onClick={() => setShowModal(true)}>show</button>
+			<button onClick={handleFocus}>FOCUS</button>
+			<input type='text' ref={inputRef} />
+			{showModal && (
+				<Modal closeModal={() => setShowModal(false)}>MOdal</Modal>
+			)}
+			{isLoading && <h2>Loading...</h2>}
+			{error && <h2>{error}</h2>}
+			<button className='btn btn-secondary' onClick={getUsers}>
+				show users
+			</button>
+			<UsersList users={sortedUsers} />
 		</>
 	)
 }
 
-export default Users
-// import { Component } from 'react'
-// import { getUsersBySearch } from '../../api/users'
-// import { toast } from 'react-hot-toast'
-// const STATUS = {
-// 	IDLE: 'IDLE',
-// 	PENDING: 'PENDING',
-// 	FULFILLED: 'FULFILLED',
-// 	REJECTED: 'REJECTED',
-// }
+// const Users = () => {
+// 	const [users, setUsers] = useState(null)
+// 	const [isLoading, setIsLoading] = useState(false)
+// 	const [error, setError] = useState('')
 
-// class Users extends Component {
-// 	state = {
-// 		users: null,
-// 		searchQuery: '',
-// 		status: STATUS.IDLE,
-// 		error: '',
-// 	}
+// 	useEffect(() => {
+// 		// setIsLoading(true)
+// 		// getAllUsers()
+// 		// 	.then((data) => {
+// 		// 		setUsers(data.users)
+// 		// 	})
+// 		// 	.catch((err) => {
+// 		// 		setError(error.message)
+// 		// 		console.log('err :>> ', err)
+// 		// 	})
+// 		// 	.finally(() => {
+// 		// 		setIsLoading(false)
+// 		// 	})
+// 		getUsers()
+// 	}, [])
 
-// 	handleSearch = (e) => {
-// 		e.preventDefault()
-// 		this.setState({ searchQuery: e.target[0].value })
-// 	}
+// 	const getUsers = async () => {
+// 		setIsLoading(true)
+// 		setError('')
 
-// 	componentDidUpdate(prevProps, prevState) {
-// 		if (prevState.searchQuery !== this.state.searchQuery) this.apiUsers()
-// 	}
-
-// 	apiUsers = async () => {
 // 		try {
-// 			this.setState({ status: STATUS.PENDING })
-// 			const data = await getUsersBySearch(this.state.searchQuery)
-// 			this.setState({ users: [...data.users], status: STATUS.FULFILLED })
-// 			toast.success(`Total: ${data.total}`)
+// 			const data = await getAllUsers()
+// 			setUsers(data.users)
+// 			setIsLoading(false)
 // 		} catch (error) {
-// 			this.setState({
-// 				error: error.message,
-// 				status: STATUS.REJECTED,
-// 			})
-// 			toast.error(error.message)
+// 			setError(error.message)
+// 			setIsLoading(false)
 // 		}
 // 	}
 
-// 	render() {
-// 		const { users, error, status } = this.state
-// 		return (
-// 			<>
-// 				<SearchUsersForm handleSearch={this.handleSearch} />
-// 				<UsersList
-// 					users={users}
-// 					status={status}
-// 					error={error}
-// 					STATUS={STATUS}
-// 				/>
-// 			</>
-// 		)
-// 	}
+// 	return (
+// 		<>
+// 			{isLoading && <h2>Loading...</h2>}
+// 			{error && <h2>{error}</h2>}
+// 			<button className='btn btn-secondary' onClick={getUsers}>
+// 				show users
+// 			</button>
+// 			<UsersList users={users} />
+// 		</>
+// 	)
 // }
 
-// export default Users
+export default Users
