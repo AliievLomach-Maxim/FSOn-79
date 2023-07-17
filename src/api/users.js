@@ -7,6 +7,11 @@ export const getAllUsers = async () => {
 	return data
 }
 
+export const getUserDetails = async (id) => {
+	const { data } = await axios(`users/${id}`)
+	return data
+}
+
 export const getUsersBySearch = async (query) => {
 	const { data } = await axios(`users?name=${query}`)
 	return data

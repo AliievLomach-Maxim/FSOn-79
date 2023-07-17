@@ -1,25 +1,18 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import UsersList from './UsersList/UsersList'
 import { getAllUsers } from '../../api/users'
 import Modal from '../Modal/Modal'
+import { useUsersContext } from '../../Context/UsersContext'
 
 const Users = () => {
-	const [users, setUsers] = useState(null)
+	// const [users, setUsers] = useState(null)
+	const { users, setUsers } = useUsersContext()
+
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState('')
 	const [showModal, setShowModal] = useState(false)
-	useEffect(() => {
-		getUsers()
-	}, [])
 
-	const sortedUsers = useMemo(() => {
-		return users?.toSorted((a, b) => {
-			console.log('Sorting')
-			return a.firstName.localeCompare(b.firstName)
-		})
-	}, [users])
-
-	const getUsers = async () => {
+	const getUsers = useCallback(async () => {
 		setIsLoading(true)
 		setError('')
 
@@ -31,8 +24,18 @@ const Users = () => {
 			setError(error.message)
 			setIsLoading(false)
 		}
-	}
-	console.log('sortedUsers :>> ', sortedUsers)
+	}, [setUsers])
+
+	useEffect(() => {
+		!users && getUsers()
+	}, [getUsers, users])
+
+	const sortedUsers = useMemo(() => {
+		return users?.toSorted((a, b) => {
+			console.log('Sorting')
+			return a.firstName.localeCompare(b.firstName)
+		})
+	}, [users])
 
 	const inputRef = useRef()
 
