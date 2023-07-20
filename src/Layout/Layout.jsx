@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import Header from '../components/Header/Header'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
@@ -37,7 +37,9 @@ const Layout = () => {
 					/>
 				</Modal>
 			)}
-			<Outlet />
+			<Suspense fallback={<h2>Loading..</h2>}>
+				<Outlet />
+			</Suspense>
 		</div>
 	)
 }
