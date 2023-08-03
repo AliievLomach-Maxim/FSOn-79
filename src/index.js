@@ -4,15 +4,18 @@ import App from './components/App'
 import { BrowserRouter } from 'react-router-dom'
 import UsersProvider from './Context/UsersContext'
 // import App from './testContext/App'
-import { store } from './store/store'
+import { persistor, store } from './store/store'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<BrowserRouter basename='practices_react'>
+	<BrowserRouter>
 		<Provider store={store}>
-			<UsersProvider>
-				<App />
-			</UsersProvider>
+			<PersistGate persistor={persistor}>
+				<UsersProvider>
+					<App />
+				</UsersProvider>
+			</PersistGate>
 		</Provider>
 	</BrowserRouter>
 )

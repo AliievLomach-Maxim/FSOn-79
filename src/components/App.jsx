@@ -15,28 +15,33 @@ const UserDetailsPage = lazy(() => import('../pages/UserDetailsPage'))
 
 const App = () => {
 	return (
-		<Routes>
-			<Route path='/' element={<Layout />}>
-				<Route index element={<HomePage />} />
+		<Suspense fallback={<h1>Loading...</h1>}>
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route index element={<HomePage />} />
+					<Route
+						path='users'
+						element={
+							<PrivateGuard>
+								<UsersPage />
+							</PrivateGuard>
+						}
+					/>
+					<Route
+						path='users/details/:id'
+						element={<UserDetailsPage />}
+					/>
+				</Route>
 				<Route
-					path='users'
+					path='*'
 					element={
-						<PrivateGuard>
-							<UsersPage />
-						</PrivateGuard>
+						<Suspense fallback={<h1>Loading...</h1>}>
+							<ErrorPage />
+						</Suspense>
 					}
 				/>
-				<Route path='users/details/:id' element={<UserDetailsPage />} />
-			</Route>
-			<Route
-				path='*'
-				element={
-					<Suspense fallback={<h1>Loading...</h1>}>
-						<ErrorPage />
-					</Suspense>
-				}
-			/>
-		</Routes>
+			</Routes>
+		</Suspense>
 	)
 }
 

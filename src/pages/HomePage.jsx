@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Counter from '../components/Counter/Counter'
 import { useSelector, useDispatch } from 'react-redux'
 import { createUser, updateUser } from '../store/user/actions'
+import Step from '../components/Counter/Step'
 
 const HomePage = () => {
 	const { name, age } = useSelector((state) => state.user)
@@ -13,7 +14,12 @@ const HomePage = () => {
 		// dispatch({ type: 'createNewName', payload: 'Bob' })
 	}, [dispatch])
 
-	return <Counter />
+	return (
+		<>
+			<Step />
+			<Counter />
+		</>
+	)
 }
 
 export default HomePage
