@@ -6,7 +6,7 @@ import Step from '../components/Counter/Step'
 
 const HomePage = () => {
 	const { name, age } = useSelector((state) => state.user)
-	console.log('name,age :>> ', name, age)
+
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(createUser('Bob'))

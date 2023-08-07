@@ -3,7 +3,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://practices-api.vercel.app/'
 
 export const getAllUsers = async () => {
-	const { data } = await axios('users')
+	const { data } = await axios('auth/refresh', {
+		headers: { Authorization: 'Bearer qrwetynbasvd' },
+	})
 	return data
 }
 
