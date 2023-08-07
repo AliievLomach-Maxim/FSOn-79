@@ -13,7 +13,7 @@ const Step = () => {
 		const { value } = e.target.elements.step
 		// dispatch(setStepAction(value))
 	}
-	console.log('value :>> ', value)
+
 	return (
 		<>
 			<button onClick={() => setValue((prev) => !prev)}>CLICK</button>

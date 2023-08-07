@@ -1,6 +1,12 @@
+import { useDispatch } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
+import { getAllUsersThunk } from '../../store/users/slice'
 
 const Header = ({ handleShowModal }) => {
+	const dispatch = useDispatch()
+	const handleAction = () => {
+		dispatch(getAllUsersThunk())
+	}
 	return (
 		<nav className='navbar bg-dark mb-3 navbar-expand-md'>
 			<div className='container-fluid'>
@@ -32,6 +38,12 @@ const Header = ({ handleShowModal }) => {
 					onClick={handleShowModal}
 				>
 					Open Modal
+				</button>
+				<button
+					className='btn btn-outline-success'
+					onClick={handleAction}
+				>
+					Thunk
 				</button>
 			</div>
 		</nav>

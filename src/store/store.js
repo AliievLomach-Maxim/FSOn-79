@@ -20,6 +20,16 @@ import {
 
 // const persistedReducer = persistReducer(persistConfig, reducer)
 
+// const customMiddleware = (store) => {
+// 	return (next) => {
+// 		return (action) => {
+// 			if (typeof action === 'function') {
+// 				action(store.dispatch)
+// 			} else return next(action)
+// 		}
+// 	}
+// }
+
 export const store = configureStore({
 	reducer,
 	middleware: (getDefaultMiddleware) =>
