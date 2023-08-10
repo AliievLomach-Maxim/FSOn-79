@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import PrivateGuard from '../guards/PrivateGuard'
+import ProductsPage from '../pages/ProductsPage'
 // import HomePage from '../pages/HomePage'
 // import UsersPage from '../pages/UsersPage'
 // import Layout from '../Layout/Layout'
@@ -31,6 +32,7 @@ const App = () => {
 						path='users/details/:id'
 						element={<UserDetailsPage />}
 					/>
+					<Route path='products' element={<ProductsPage />} />
 				</Route>
 				<Route
 					path='*'
