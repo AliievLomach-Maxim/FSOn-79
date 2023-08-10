@@ -1,28 +1,9 @@
-// import { combineReducers } from 'redux'
 import { todoReducer } from './todo/todoReducer'
-import { userReducer } from './user/userReducer'
-import { userReducer as userReducer2 } from './userToolkit/userReducer'
-import storage from 'redux-persist/lib/storage'
-import { persistReducer } from 'redux-persist'
 import { usersReduser } from './users/slice'
-
-const persistConfig = {
-	key: 'root',
-	storage,
-	blacklist: ['age'],
-}
-const persistConfig2 = {
-	key: 'root2',
-	storage,
-	blacklist: ['name'],
-}
-
-const persistedReducerUser = persistReducer(persistConfig, userReducer)
-const persistedReducerUser2 = persistReducer(persistConfig2, userReducer2)
+import { productsReducer } from './products/slice'
 
 export const reducer = {
-	user: persistedReducerUser,
-	userToolkit: persistedReducerUser2,
 	todo: todoReducer,
 	users: usersReduser,
+	products: productsReducer,
 }
