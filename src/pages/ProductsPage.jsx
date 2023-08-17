@@ -9,14 +9,14 @@ import Error from '../components/Error/Error'
 import ProductsList from '../components/Products/ProductsList'
 import {
 	// selectSortedProducts,
-	selectProducts,
+	// selectProducts,
 	selectFilteredProducts,
 } from '../store/products/selectors'
 import { createProductAction, setFilter } from '../store/products/slice'
 import CreateProductForm from '../components/Forms/CreateProductForm/CreateProductForm'
 
 const ProductsPage = () => {
-	const { isLoading, error } = useSelector(selectProducts)
+	// const { isLoading, error } = useSelector(selectProducts)
 	// const sortedProducts = useSelector(selectSortedProducts)
 	const filteredProducts = useSelector(selectFilteredProducts)
 
@@ -59,8 +59,8 @@ const ProductsPage = () => {
 					Filter
 				</button>
 			</form>
-			{isLoading && <Loader />}
-			{error && <Error message={error} />}
+			{/* {isLoading && <Loader />}
+			{error && <Error message={error} />} */}
 			{filteredProducts && <ProductsList products={filteredProducts} />}
 		</>
 	)

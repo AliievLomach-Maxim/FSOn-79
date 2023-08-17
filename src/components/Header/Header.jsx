@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { isAuthSelect } from '../../store/auth/selectors'
+import { isAuthSelect, profileSelect } from '../../store/auth/selectors'
 import { logOut } from '../../store/auth/slice'
 import { refresh } from '../../api/auth'
 import { dellToken } from '../../api/api'
@@ -8,10 +8,12 @@ import { dellToken } from '../../api/api'
 const Header = ({ handleShowModal }) => {
 	const navigate = useNavigate()
 	const isAuth = useSelector(isAuthSelect)
+	const profile = useSelector(profileSelect)
 	const dispatch = useDispatch()
 
 	const handleLogOut = () => {
 		dispatch(logOut())
+		localStorage.removeItem('token')
 		dellToken()
 	}
 
@@ -41,6 +43,14 @@ const Header = ({ handleShowModal }) => {
 						</NavLink>
 					</div>
 				</div>
+				{profile && (
+					<NavLink
+						className='nav-link text-white mx-3 '
+						to='/profile'
+					>
+						{profile.firstName}
+					</NavLink>
+				)}
 				<button
 					className='btn btn-outline-success'
 					onClick={handleShowModal}

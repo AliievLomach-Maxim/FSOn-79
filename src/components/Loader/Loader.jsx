@@ -1,8 +1,14 @@
+import { useSelector } from 'react-redux'
+import { loadingSelect } from '../../store/root/selectors'
+
 const Loader = () => {
+	const isLoading = useSelector(loadingSelect)
 	return (
-		<div className='spinner-border text-success' role='status'>
-			<span className='visually-hidden'>Loading...</span>
-		</div>
+		isLoading && (
+			<div className='spinner-border text-success' role='status'>
+				<span className='visually-hidden'>Loading...</span>
+			</div>
+		)
 	)
 }
 

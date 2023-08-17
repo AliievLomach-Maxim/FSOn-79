@@ -5,6 +5,9 @@ import ProductsPage from '../pages/ProductsPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import PublicGuards from '../guards/PublicGuards'
+import Loader from './Loader/Loader'
+import Error from './Error/Error'
+import ProfilePage from '../pages/ProfilePage/ProfilePage'
 // import HomePage from '../pages/HomePage'
 // import UsersPage from '../pages/UsersPage'
 // import Layout from '../Layout/Layout'
@@ -20,6 +23,8 @@ const UserDetailsPage = lazy(() => import('../pages/UserDetailsPage'))
 const App = () => {
 	return (
 		<Suspense fallback={<h1>Loading...</h1>}>
+			<Loader />
+			<Error />
 			<Routes>
 				<Route path='/' element={<Layout />}>
 					<Route index element={<HomePage />} />
@@ -36,6 +41,14 @@ const App = () => {
 						element={<UserDetailsPage />}
 					/>
 					<Route path='products' element={<ProductsPage />} />
+					<Route
+						path='profile'
+						element={
+							<PrivateGuard>
+								<ProfilePage />
+							</PrivateGuard>
+						}
+					/>
 				</Route>
 				<Route
 					path='/login'
