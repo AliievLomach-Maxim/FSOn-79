@@ -1,13 +1,25 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import Header from '../components/Header/Header'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Modal from '../components/Modal/Modal'
 import FormSignUp from '../components/Forms/FormSignUp/FormSignUp'
 import { nanoid } from 'nanoid'
+import { useDispatch, useSelector } from 'react-redux'
+import { isAuthSelect } from '../store/auth/selectors'
+import { refreshThunk } from '../store/auth/thunks'
 
 const Layout = () => {
+	const isAuth = useSelector(isAuthSelect)
+	const dispatch = useDispatch()
 	const [isShowModal, setIsShowModal] = useState(false)
+
+	useEffect(() => {
+		const refresh = () => {
+			!isAuth && dispatch(refreshThunk())
+		}
+		refresh()
+	}, [dispatch, isAuth])
 
 	const openModal = () => {
 		setIsShowModal(true)

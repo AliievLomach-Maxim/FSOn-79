@@ -1,10 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { errorSelect } from '../../store/root/selectors'
 
-const Error = ({ message }) => {
+const Error = () => {
+	const error = useSelector(errorSelect)
+
 	return (
-		<div className='alert alert-danger' role='alert'>
-			{message}
-		</div>
+		error && (
+			<div className='alert alert-danger' role='alert'>
+				{error}
+			</div>
+		)
 	)
 }
 
